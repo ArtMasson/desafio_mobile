@@ -1,6 +1,5 @@
 import 'package:desafio_mobile/app/common/store/global_store.dart';
 import 'package:desafio_mobile/app/home/domain/usecase/save_user_info_in_db_usecase.dart';
-import 'package:desafio_mobile/core/common/injected/module.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';

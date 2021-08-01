@@ -1,7 +1,5 @@
 import 'package:desafio_mobile/app/home/domain/repository/home_repository.dart';
 import 'package:desafio_mobile/app/home/domain/usecase/save_user_info_in_db_usecase.dart';
-import 'package:desafio_mobile/app/login/domain/repository/login_repository.dart';
-import 'package:desafio_mobile/app/login/domain/usecase/sign_in_with_email_and_password_usecase.dart';
 import 'package:desafio_mobile/core/common/injected/module.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
