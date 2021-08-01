@@ -1,9 +1,10 @@
 import 'package:desafio_mobile/app/login/domain/repository/login_repository.dart';
-import 'package:desafio_mobile/core/common/injected/module.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class SignInWithEmailAndPasswordUsecase {
-  final LoginRepository _repository = getIt.get<LoginRepository>();
+  final LoginRepository _repository;
+
+  SignInWithEmailAndPasswordUsecase(this._repository);
 
   Future<User?> call({
     required String email,

@@ -20,14 +20,14 @@ final GetIt getIt = GetIt.instance;
 Future<void> configureInjection() async {
   getIt
     ..registerLazySingleton<DbStorageDao>(() => DbStorageImpDao())
-    ..registerLazySingleton(() => SignInWithEmailAndPasswordUsecase())
+    ..registerLazySingleton(() => SignInWithEmailAndPasswordUsecase(getIt()))
     ..registerLazySingleton<LoginDatasource>(
       () => LoginDatasourceImp(),
     )
     ..registerLazySingleton<LoginRepository>(
-      () => LoginRepositoryImp(),
+      () => LoginRepositoryImp(getIt()),
     )
-    ..registerFactory(() => LoginController())
+    ..registerFactory(() => LoginController(getIt()))
     ..registerLazySingleton(() => SaveUserInfoInDbUsecase())
     ..registerLazySingleton<HomeDatasource>(
       () => HomeDatasourceImp(),
@@ -37,5 +37,4 @@ Future<void> configureInjection() async {
     )
     ..registerFactory(() => HomeController())
     ..registerLazySingleton(() => GlobalStore());
-  // getIt.registerLazySingleton(() => ThemeStore());
 }

@@ -19,9 +19,6 @@ abstract class _HomeController with Store {
   @observable
   bool isLoading = true;
 
-  @observable
-  bool hasError = false;
-
   @action
   Future<void> saveUserInfoInDb(LatLng position) async {
     if (_globalStore.hasCurrentUser) {
