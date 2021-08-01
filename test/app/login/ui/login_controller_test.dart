@@ -1,5 +1,6 @@
 import 'package:desafio_mobile/app/login/domain/usecase/sign_in_with_email_and_password_usecase.dart';
 import 'package:desafio_mobile/app/login/ui/controller/login_controller.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,8 +12,11 @@ import '../../common/firebase_mock.dart';
 class MockSignInWithEmailAndPasswordUsecase extends Mock
     implements SignInWithEmailAndPasswordUsecase {}
 
+class MockFirebaseAnalytics extends Mock implements FirebaseAnalytics {}
+
 void main() {
   late SignInWithEmailAndPasswordUsecase _usecase;
+  late FirebaseAnalytics _analytics;
   late LoginController _controller;
   late User _mockUser;
 
@@ -33,7 +37,8 @@ void main() {
   setUp(() async {
     await Firebase.initializeApp();
     _usecase = MockSignInWithEmailAndPasswordUsecase();
-    _controller = LoginController(_usecase);
+    _analytics = MockFirebaseAnalytics();
+    _controller = LoginController(_usecase, _analytics);
     _createMockUser();
   });
 
@@ -42,6 +47,11 @@ void main() {
       "Success - Should return true",
       () async {
         // arrange
+        when(
+          () => _analytics.logLogin(loginMethod: any(named: 'loginMethod')),
+        ).thenAnswer(
+          (invocation) => Future.value(),
+        );
         when(
           () => _usecase(
             email: any(named: 'email'),
@@ -67,6 +77,13 @@ void main() {
       "Login Failed - Should return false",
       () async {
         when(
+          () => _analytics.logEvent(
+            name: any(named: 'name'),
+          ),
+        ).thenAnswer(
+          (invocation) => Future.value(),
+        );
+        when(
           () => _usecase(
             email: any(named: 'email'),
             password: any(named: 'password'),
@@ -87,65 +104,4 @@ void main() {
       },
     );
   });
-
-  // group("Checkin Home Controller - HasGuest", () {
-  //   test(
-  //     "Failure - Should return error to has guest",
-  //     () async {
-  //       when(_findAllGuestsUseCase.call(tReservationID)).thenAnswer(
-  //         (_) => Future.value(const Left("")),
-  //       );
-
-  //       _controller.hotelSelected(tReservation);
-
-  //       final _result = await _controller.hasGuestFromReservation();
-
-  //       expect(_result, false);
-  //       verify(_findAllGuestsUseCase.call(tReservationID));
-  //       verifyNoMoreInteractions(_findAllGuestsUseCase);
-  //     },
-  //   );
-  //   test(
-  //     "Success - Should return success has guest",
-  //     () async {
-  //       when(_findAllGuestsUseCase.call(tReservationID)).thenAnswer(
-  //         (_) => Future.value(Right(tGuestlList)),
-  //       );
-
-  //       _controller.hotelSelected(tReservation);
-
-  //       final _result = await _controller.hasGuestFromReservation();
-
-  //       expect(_result, true);
-  //       verify(_findAllGuestsUseCase.call(tReservationID));
-  //       verifyNoMoreInteractions(_findAllGuestsUseCase);
-  //     },
-  //   );
-  // });
-
-  // group("Checkin Home Controller - Checkin Onboarding", () {
-  //   test(
-  //     "hasCheckinOnboardingDone - should be get a bool",
-  //     () {
-  //       when(_hasCheckinOnboardingDoneUseCase.call()).thenAnswer(
-  //         (_) async => true,
-  //       );
-
-  //       final _result = _controller.hasCheckinOnboardingDone();
-
-  //       expect(_result, true);
-  //       verify(_hasCheckinOnboardingDoneUseCase.call()).called(1);
-  //       verifyNoMoreInteractions(_hasCheckinOnboardingDoneUseCase);
-  //     },
-  //   );
-  //   test(
-  //     "setCheckinOnboardingDone - should set OnboardingDone",
-  //     () {
-  //       _controller.setCheckinOnboardingDone();
-
-  //       verify(_setCheckinOnboardingDoneUseCase.call()).called(1);
-  //       verifyNoMoreInteractions(_setCheckinOnboardingDoneUseCase);
-  //     },
-  //   );
-  // });
 }

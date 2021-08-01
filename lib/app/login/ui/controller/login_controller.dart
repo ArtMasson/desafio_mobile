@@ -7,12 +7,12 @@ class LoginController = _LoginController with _$LoginController;
 
 abstract class _LoginController with Store {
   late SignInWithEmailAndPasswordUsecase _signInWithEmailAndPasswordUseCase;
-  final FirebaseAnalytics _analytics = FirebaseAnalytics();
+  final FirebaseAnalytics _analytics;
 
   @observable
   bool isLoading = false;
 
-  _LoginController(this._signInWithEmailAndPasswordUseCase);
+  _LoginController(this._signInWithEmailAndPasswordUseCase, this._analytics);
 
   @action
   Future<bool> signInWithEmailAndPassword(String email, String password) async {
