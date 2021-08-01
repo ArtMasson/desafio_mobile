@@ -13,29 +13,32 @@ import 'package:desafio_mobile/app/login/data/repository/login_repository_imp.da
 import 'package:desafio_mobile/app/login/domain/repository/login_repository.dart';
 import 'package:desafio_mobile/app/login/domain/usecase/sign_in_with_email_and_password_usecase.dart';
 import 'package:desafio_mobile/app/login/ui/controller/login_controller.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:get_it/get_it.dart';
+import 'package:location/location.dart';
 
 final GetIt getIt = GetIt.instance;
 
 Future<void> configureInjection() async {
   getIt
+    ..registerFactory(() => Location())
+    ..registerFactory(() => FirebaseAnalytics())
     ..registerLazySingleton<DbStorageDao>(() => DbStorageImpDao())
-    ..registerLazySingleton(() => SignInWithEmailAndPasswordUsecase())
+    ..registerLazySingleton(() => SignInWithEmailAndPasswordUsecase(getIt()))
     ..registerLazySingleton<LoginDatasource>(
       () => LoginDatasourceImp(),
     )
     ..registerLazySingleton<LoginRepository>(
-      () => LoginRepositoryImp(),
+      () => LoginRepositoryImp(getIt()),
     )
-    ..registerFactory(() => LoginController())
-    ..registerLazySingleton(() => SaveUserInfoInDbUsecase())
+    ..registerFactory(() => LoginController(getIt(), getIt()))
+    ..registerLazySingleton(() => SaveUserInfoInDbUsecase(getIt()))
     ..registerLazySingleton<HomeDatasource>(
       () => HomeDatasourceImp(),
     )
     ..registerLazySingleton<HomeRepository>(
-      () => HomeRepositoryImp(),
+      () => HomeRepositoryImp(getIt()),
     )
-    ..registerFactory(() => HomeController())
+    ..registerFactory(() => HomeController(getIt(), getIt(), getIt()))
     ..registerLazySingleton(() => GlobalStore());
-  // getIt.registerLazySingleton(() => ThemeStore());
 }

@@ -10,17 +10,19 @@ part 'home_controller.g.dart';
 class HomeController = _HomeController with _$HomeController;
 
 abstract class _HomeController with Store {
-  Location _location = Location();
-  GlobalStore _globalStore = getIt.get<GlobalStore>();
-  SaveUserInfoInDbUsecase _saveUserInfoInDbUsecase =
-      getIt.get<SaveUserInfoInDbUsecase>();
+  final Location _location;
+  final GlobalStore _globalStore;
+  final SaveUserInfoInDbUsecase _saveUserInfoInDbUsecase;
   final FirebaseAnalytics _analytics = FirebaseAnalytics();
 
   @observable
   bool isLoading = true;
 
-  @observable
-  bool hasError = false;
+  _HomeController(
+    this._globalStore,
+    this._saveUserInfoInDbUsecase,
+    this._location,
+  );
 
   @action
   Future<void> saveUserInfoInDb(LatLng position) async {

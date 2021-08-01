@@ -24,21 +24,6 @@ mixin _$LoginController on _LoginController, Store {
     });
   }
 
-  final _$hasErrorAtom = Atom(name: '_LoginController.hasError');
-
-  @override
-  bool get hasError {
-    _$hasErrorAtom.reportRead();
-    return super.hasError;
-  }
-
-  @override
-  set hasError(bool value) {
-    _$hasErrorAtom.reportWrite(value, super.hasError, () {
-      super.hasError = value;
-    });
-  }
-
   final _$signInWithEmailAndPasswordAsyncAction =
       AsyncAction('_LoginController.signInWithEmailAndPassword');
 
@@ -51,8 +36,7 @@ mixin _$LoginController on _LoginController, Store {
   @override
   String toString() {
     return '''
-isLoading: ${isLoading},
-hasError: ${hasError}
+isLoading: ${isLoading}
     ''';
   }
 }

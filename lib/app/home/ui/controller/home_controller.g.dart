@@ -24,21 +24,6 @@ mixin _$HomeController on _HomeController, Store {
     });
   }
 
-  final _$hasErrorAtom = Atom(name: '_HomeController.hasError');
-
-  @override
-  bool get hasError {
-    _$hasErrorAtom.reportRead();
-    return super.hasError;
-  }
-
-  @override
-  set hasError(bool value) {
-    _$hasErrorAtom.reportWrite(value, super.hasError, () {
-      super.hasError = value;
-    });
-  }
-
   final _$saveUserInfoInDbAsyncAction =
       AsyncAction('_HomeController.saveUserInfoInDb');
 
@@ -60,8 +45,7 @@ mixin _$HomeController on _HomeController, Store {
   @override
   String toString() {
     return '''
-isLoading: ${isLoading},
-hasError: ${hasError}
+isLoading: ${isLoading}
     ''';
   }
 }

@@ -1,5 +1,4 @@
 import 'package:desafio_mobile/app/login/domain/usecase/sign_in_with_email_and_password_usecase.dart';
-import 'package:desafio_mobile/core/common/injected/module.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:mobx/mobx.dart';
 part 'login_controller.g.dart';
@@ -7,15 +6,13 @@ part 'login_controller.g.dart';
 class LoginController = _LoginController with _$LoginController;
 
 abstract class _LoginController with Store {
-  final SignInWithEmailAndPasswordUsecase _signInWithEmailAndPasswordUseCase =
-      getIt.get<SignInWithEmailAndPasswordUsecase>();
-  final FirebaseAnalytics _analytics = FirebaseAnalytics();
+  late SignInWithEmailAndPasswordUsecase _signInWithEmailAndPasswordUseCase;
+  final FirebaseAnalytics _analytics;
 
   @observable
   bool isLoading = false;
 
-  @observable
-  bool hasError = false;
+  _LoginController(this._signInWithEmailAndPasswordUseCase, this._analytics);
 
   @action
   Future<bool> signInWithEmailAndPassword(String email, String password) async {
