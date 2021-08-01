@@ -1,33 +1,82 @@
-# Desafio programação - para vaga desenvolvedor Mobile
-Por favor leiam este documento do começo ao fim, com muita atenção.
-O intuito deste teste é avaliar seus conhecimentos técnicos em desenvolvimento mobile.
-Este desafio deve ser feito por você em sua casa. Gaste o tempo que você quiser, porém normalmente você não deve precisar de mais do que algumas horas para finalizar.
+# ByCoders_ Mobile Challenge (Flutter)
+A mobile ByCoders_ challenge implemented in Flutter using Clean Architecture.
 
-# Instruções de entrega do desafio
+## Challenge Requirements
 
-1. Primeiro, faça um fork deste projeto para sua conta no Github (crie uma se você não possuir).
-2. Em seguida, implemente o projeto,tal qual descrito abaixo, utilizando sua linguagem de programação mobile preferida em seu clone local.
-3. Por fim, envie via email o projeto ou o fork/link do projeto para seu contato bycoders_.
+1. Login page with FirebaseAuth (using email and password);
+2. Home screen with a map rendering a point at the device's current location;
+4. Store user data in the global store;
+5. Track successful login and successful rendering with Analytics (send an event with data considered essential in these two cases);
+6. Track errors and submit them to Crashlytics;
+7. Store in the local database (in this case using Sembast) the logged in user and his last position on the map;
+8. Test login flow (unit and e2e);
+9. Test home flow (unit and e2e).
 
-# Descrição do projeto
+<!-- GETTING STARTED -->
+## Getting Started
 
-1. Tela de login usando (email e senha);
-2. Tela home com mapa renderizando um ponto na localização atual do device;
-3. Realizar o login utilizando Firebase Auth;
-4. Armazenar os dados do usuário na store global;
-5. Rastrear login com sucesso e renderização com sucesso com Analytics (enviar um evento com dados considerados primordiais nesses dois casos);
-6. Rastrear os erros e envia-los ao Crashlytics;
-7. Armazenar na base de dados local (preferência por WatermelonDB, mas pode usar outro banco de dados) o usuário logado e sua última posição no mapa;
-8. Testar fluxo de login (unit e e2e);
-9. Testar fluxo da home (unit e e2e).
+To get a local copy up and running follow these simple steps.
 
-# Avaliação
+### Prerequisites
 
-Seu projeto será avaliado de acordo com os seguintes critérios.
+* [Flutter 2.2.3](https://flutter.dev/docs/development/tools/sdk/releases)
 
-1. Sua aplicação preenche os requerimentos básicos?
-2. Você documentou a maneira de configurar o ambiente e rodar sua aplicação?
-3. Você seguiu as instruções de envio do desafio?
-4. Qualidade e cobertura dos testes unitários.
+### Installation
 
-Adicionalmente, tentaremos verificar a sua familiarização com as bibliotecas padrões (standard libs), bem como sua experiência com programação orientada a objetos a partir da estrutura de seu projeto.
+1. Clone the repo
+   ```
+   git clone https://github.com/ArtMasson/desafio_mobile.git
+   ```
+2. Install Flutter packages
+   ```
+   flutter pub-get
+   ```
+3. Generate Mobx files
+   ```
+   flutter packages pub run build_runner build
+   ```
+4. Run the project
+   ```
+   flutter run
+   ```
+
+## Usage
+
+- Login with:
+
+```
+email: user@user.com
+password: 123456
+```
+
+![image](https://user-images.githubusercontent.com/44551981/127781204-828137a2-6803-4b66-b764-6ac45080b3e3.png)
+![image](https://user-images.githubusercontent.com/44551981/127781219-78491841-0d8d-4f12-a8d1-b15b3bb7477f.png)
+![image](https://user-images.githubusercontent.com/44551981/127781228-720b9887-7f29-4d45-a26b-4b3ec9b3b9d5.png)
+![image](https://user-images.githubusercontent.com/44551981/127781238-bd77ee39-7097-4036-a52e-c0efea9e48ec.png)
+
+
+- To enable event track in firestore analytics debug view i use the following command:
+
+   ```
+   adb -d shell setprop debug.firebase.analytics.app com.arthurmasson.desafio_mobile
+   ```
+   
+![image](https://user-images.githubusercontent.com/44551981/127780927-c61986d3-4faf-447b-b1d0-06a5159bc96b.png)
+
+
+## Built With
+
+* [Flutter 2.2.3](https://flutter.dev/docs/development/tools/sdk/releases)
+* [Firebase_Core 1.4.0](https://pub.dev/packages/firebase_core)
+* [Firebase Auth 3.0.1](https://pub.dev/packages/firebase_auth)
+* [Firebase Crashlytics 2.1.1](https://pub.dev/packages/firebase_crashlytics)
+* [Firebase Analytics 8.2.0](https://pub.dev/packages/firebase_analytics)
+* [Mobx 2.0.1](https://pub.dev/packages/mobx)
+* [GetIt 7.1.4](https://pub.dev/packages/get_it)
+* [Sembast NoSqlDb 3.1.0+2](https://pub.dev/packages/sembast)
+* [Google Maps Flutter 2.0.6](https://pub.dev/packages/google_maps_flutter)
+
+
+
+
+
