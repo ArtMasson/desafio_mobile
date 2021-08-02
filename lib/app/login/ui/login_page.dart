@@ -66,6 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 50.h,
               ),
               CustomFieldText(
+                key: Key('email-field'),
                 label: 'Email',
                 controller: _emailController,
                 isEmail: true,
@@ -74,6 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 10.h,
               ),
               CustomFieldText(
+                key: Key('password-field'),
                 label: 'Senha',
                 controller: _passwordController,
                 isPassword: true,

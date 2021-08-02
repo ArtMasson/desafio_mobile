@@ -7,6 +7,7 @@ class CustomFieldText extends StatelessWidget {
   final TextInputType inputType;
   final bool isPassword;
   final bool isEmail;
+  final Key? key;
 
   CustomFieldText({
     required this.controller,
@@ -14,6 +15,7 @@ class CustomFieldText extends StatelessWidget {
     this.inputType = TextInputType.text,
     this.isPassword = false,
     this.isEmail = false,
+    this.key,
   });
 
   static final fontDescriptionStyle = TextStyle(
@@ -51,6 +53,7 @@ class CustomFieldText extends StatelessWidget {
     return Container(
       height: 60,
       child: TextFormField(
+        key: key,
         controller: controller,
         obscureText: isPassword,
         validator: (String? value) {
