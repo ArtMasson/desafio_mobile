@@ -8,7 +8,7 @@ A mobile ByCoders_ challenge implemented in Flutter using Clean Architecture.
 4. Store user data in the global store;
 5. Track successful login and successful rendering with Analytics (send an event with data considered essential in these two cases);
 6. Track errors and submit them to Crashlytics;
-7. Store in the local database (in this case using Sembast) the logged in user and his last position on the map;
+7. Store in the local database (in this case using Sembast) the logged user and his last position on the map;
 8. Test login flow (unit and e2e);
 9. Test home flow (unit and e2e).
 
